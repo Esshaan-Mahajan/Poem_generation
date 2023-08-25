@@ -28,27 +28,31 @@ As a second step, let us break down the large prediction problem into a set of s
 
  
 ## Methodology Adopted
-	Data Collection
+- Data Collection
 
-Most of the poems were collected from website Poetry Foundation.org . I was able to extract 7poems written by William Wordsworth . Saved all these poems in different text files. I made sure that poems had similar words per sentence. Data was cleaned around punctuations and using subword approach the data was first converted into lowercase and tokenized, last means adding whitespace around punctuation characters. After that byte-pair encoding was used to split the data into subwords. At last most used words with their frequency was plotted.
+Most of the poems were collected from website Poetry Foundation.org . I was able to extract 7poems written by William Wordsworth . Saved all these poems in different text files. I made sure that poems had similar words per sentence. Data was cleaned around punctuations and using subword approach the data was first converted into lowercase and tokenized, last means adding whitespace around punctuation characters. After that byte-pair encoding was used to split the data into subwords. At last most used words with their frequency were plotted.
  
+![image](https://github.com/Esshaan-Mahajan/Poem_generation/assets/56061481/d92bef15-432d-4505-9493-758713955985)
 
 
 
 
 
 
-	Markov Chain
+- Markov Chain
 
 
 A Markov Chain is a stochastic process that models a finite set of states, with fixed conditional probabilities of jumping from a given state to another.
 What this means is, we will have an “agent” that randomly jumps around different states, with a certain probability of going from each state to another one.
 To show what a Markov Chain looks like, we can use a digraph, where each node is a state (with a label or associated data), and the weight of the edge that goes from node a to node b is the probability of jumping from state a to state b.
 Here’s an example, modelling the weather as a Markov Chain.
+![image](https://github.com/Esshaan-Mahajan/Poem_generation/assets/56061481/8b4db755-b9e8-4a82-a88e-cad8d33c8a62)
+
 
  
 We can express the probability of going from state a to state b as a matrix component, where the whole matrix characterizes our Markov chain process, corresponding the digraph’s adjacency matrix.
  
+![image](https://github.com/Esshaan-Mahajan/Poem_generation/assets/56061481/062953a1-c0a3-42b8-af23-4f719dde1235)
 
 Then, if we represent the current state as a one-hot encoding, we can obtain the conditional probabilities for the next state’s values by taking the current state, and looking at its corresponding row.
 After that, if we repeatedly sample the discrete distribution described by the n-th state’s row, we may model a succession of states of arbitrary length.
@@ -65,7 +69,7 @@ I will then add 1 to the j-th component of the i-th vector, where i is the index
 If I normalize each word vector, I will then have a probability distribution for the next word, given the previous k tokens.
 
 
-	LSTM
+- LSTM
 
 
 
@@ -74,7 +78,7 @@ I built the neural network using Keras. I added an embedding layer, bidirectiona
 
 <img width="437" alt="image" src="https://github.com/Esshaan-Mahajan/Poem_generation/assets/56061481/d18b172f-f0f8-4121-a6db-bfa22eaf78f1">
 
-None
+
 I trained the model using 100 epochs and got loss: 2.0985 ,accuracy: 0.5755
 . I plotted the model’s accuracy and loss using matplotlib.pyplot and it’s visualized below.
  

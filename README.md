@@ -1,6 +1,6 @@
 # Poem_generation
 This is the project I made during my summer intern at Utkrisht ACM USICT.
-### Abstract
+## Abstract
 Text generation is one of the applications that Deep learning could provide in Natural language processing.
 Through this project, I aim to use this concept and extend its usage into generating a poem similar to ones made by ‘William Wordsworth’.
  For this I have first made a custom dataset from text files containing poems of William Wordsworth and created a corpus from it.
@@ -11,7 +11,7 @@ Thereafter, I used two different ways to generate text/poem:-
 
 
 
-### Introduction
+## Introduction
 
 
 Humans have written poems for centuries, and some of us have been able to write great poems and even whole books filled with poems. However, is a computer able to create new poetry by learning from poems written by various artists. 
@@ -19,7 +19,7 @@ From machine learning standpoint, this task is purely unsupervised. Neural netwo
 In the following sections the data collection procedure is described and also the architectures for networks used in the project. In the final section we summarise the results and discuss possible ways to improve upon the work done so far.
 
 
-### Problem Statement/Motivation
+## Problem Statement/Motivation
 
 
 Text generation is one of the many breakthroughs of machine learning. This breakthrough comes in handy in the world of creative arts through song writing, poems, short stories and even novels. I decided to channel my inner poet by building and training a neural network that generates poems by predicting the next set of words from the seed text using LSTM and also by using Markov chain. LSTMs are the go to models for text generation and its preferred over RNNs because of RNNs vanishing and exploding gradients problems. 
@@ -27,7 +27,7 @@ As a first step, let’s rephrase the problem of writing a poem to a prediction 
 As a second step, let us break down the large prediction problem into a set of smaller ones. The smaller problem is to predict only one word that a poet would write following some given text. Later we will see how to predict a poet’s writing on a subject using one character predictor.
 
  
-Methodology Adopted
+## Methodology Adopted
 	Data Collection
 
 Most of the poems were collected from website Poetry Foundation.org . I was able to extract 7poems written by William Wordsworth . Saved all these poems in different text files. I made sure that poems had similar words per sentence. Data was cleaned around punctuations and using subword approach the data was first converted into lowercase and tokenized, last means adding whitespace around punctuation characters. After that byte-pair encoding was used to split the data into subwords. At last most used words with their frequency was plotted.
@@ -53,7 +53,7 @@ We can express the probability of going from state a to state b as a matrix comp
 Then, if we represent the current state as a one-hot encoding, we can obtain the conditional probabilities for the next state’s values by taking the current state, and looking at its corresponding row.
 After that, if we repeatedly sample the discrete distribution described by the n-th state’s row, we may model a succession of states of arbitrary length.
  
-Markov Chains for Text Generation
+### Markov Chains for Text Generation
  
 In order to generate text with Markov Chains, we need to define a few things:
 •	What are our states going to be?
@@ -71,37 +71,23 @@ If I normalize each word vector, I will then have a probability distribution for
 
 I tokenized the corpus file and created input sequences using list of tokens. I padded these sequences and created predictors and labels.
 I built the neural network using Keras. I added an embedding layer, bidirectional LSTM, a dropout of 20%, an LSTM and two dense layer consisting of ReLu and softmax activations. I also added regularizer to prevent over-fitting. I compiled the model’s loss using categorical cross-entropy, Adam optimizer and ‘accuracy’ metrics was also used. The summary of the model is as seen below.
-Model: "sequential_1"
-_________________________________________________________________
-Layer (type)                 Output Shape              Param #   
-=================================================================
-embedding (Embedding)        (None, 15, 100)           88400     
-_________________________________________________________________
-bidirectional (Bidirectional (None, 15, 300)           301200    
-_________________________________________________________________
-dropout (Dropout)            (None, 15, 300)           0         
-_________________________________________________________________
-lstm_1 (LSTM)                (None, 100)               160400    
-_________________________________________________________________
-dense (Dense)                (None, 442)               44642     
-_________________________________________________________________
-dense_1 (Dense)              (None, 884)               391612    
-=================================================================
-Total params: 986,254
-Trainable params: 986,254
-Non-trainable params: 0
-_________________________________________________________________
+
+<img width="437" alt="image" src="https://github.com/Esshaan-Mahajan/Poem_generation/assets/56061481/d18b172f-f0f8-4121-a6db-bfa22eaf78f1">
+
 None
 I trained the model using 100 epochs and got loss: 2.0985 ,accuracy: 0.5755
 . I plotted the model’s accuracy and loss using matplotlib.pyplot and it’s visualized below.
  
- 
+ ![image](https://github.com/Esshaan-Mahajan/Poem_generation/assets/56061481/bd5648a8-aaa1-4773-a57a-57d2bb99bb97)
+ ![image](https://github.com/Esshaan-Mahajan/Poem_generation/assets/56061481/dbd7e95a-d574-4e97-97c1-422bdb7e9d87)
+
+
 
 Finally, I inputted a seed text which will be the origin from which the poem will be generated and set the next words to 1000. 
 
 
-### Results Obtained
-For Markov chain
+## Results Obtained
+### For Markov chain
 
 dear whose man in the hazels of many one
 when one frugal dame—
@@ -161,7 +147,7 @@ who in truth,
 
 
 
-For LSTM
+### For LSTM
 Who is the happy Warrior? Who is he
  had means and sullied man â€” lifted high and
  could who not not not not not but that
@@ -266,5 +252,5 @@ Who is the happy Warrior? Who is he
 
 
 
-### Conclusion and Future work
+## Conclusion and Future work
 Both the methods Markov chain and LSTM have shown promising results for poem generation.They generated text as expected, though some parts of the poem sound meaningless, the model can be tweaked to gain higher accuracy and predict more meaningful poems. The next steps should be to figure out how to add rhymes to the poem with appropriate rhyme scheme and have more meanings attached to poems.

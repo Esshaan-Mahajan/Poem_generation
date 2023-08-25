@@ -1,5 +1,5 @@
 # Poem_generation
-This is the project I made during my summer intern at Utkrisht ACM USICT.
+This is the project I made during my summer intern at Utkrisht USICT.
 ## Abstract
 Text generation is one of the applications that Deep learning could provide in Natural language processing.
 Through this project, I aim to use this concept and extend its usage into generating a poem similar to ones made by ‘William Wordsworth’.
